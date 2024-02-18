@@ -6,6 +6,7 @@ const numberBox = document.querySelector('.number');
 
 let randomNumber = Math.trunc(Math.random() * 20) + 1;
 let gameScore = 20;
+let highScore = 0;
 
 checkBtn.addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
@@ -18,9 +19,13 @@ checkBtn.addEventListener('click', function () {
   } else if (guess === randomNumber) {
     numberBox.textContent = randomNumber;
     messageText.textContent = '🎉 Correct number!';
-    gameScore++;
     document.body.style.backgroundColor = 'green';
     document.querySelector('.number').style.width = '30rem';
+
+    if (gameScore > highScore) {
+      highScore = gameScore;
+      document.querySelector('.highscore').textContent = highScore;
+    }
 
     // When guess is higher than the random number
   } else if (guess > randomNumber) {
